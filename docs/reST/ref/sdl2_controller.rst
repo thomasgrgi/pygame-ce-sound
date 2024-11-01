@@ -116,6 +116,20 @@ events related to controllers.
 
     .. ## pygame._sdl2.controller.name_forindex ##
 
+.. function:: load_mapping
+
+    | :sl:`Load a mapping for a controller`
+    | :sg:`load_mapping(mapping) -> None`
+
+    Add support for controllers that SDL is unaware of or to cause an existing
+    controller to have a different binding.
+
+    If this function is called before ``controller.init``, SDL will generate an
+    ``SDL_CONTROLLERDEVICEADDED`` event for matching controllers that are plugged in
+    at the time that ``controller.init`` is called.
+
+    .. ## pygame._sdl2.controller.load_mapping ##
+
 .. class:: Controller
 
     | :sl:`Create a new Controller object.`

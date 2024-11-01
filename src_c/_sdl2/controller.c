@@ -95,6 +95,22 @@ controller_module_get_count(PyObject *module, PyObject *_null)
     return PyLong_FromLong(count);
 }
 
+static PyObject *
+controller_load_mapping(PyObject *module, PyObject* args, PyObject *_null)
+{
+    char * mapping;
+
+    if (!PyArg_ParseTuple(args, "s", &mapping)){
+        return NULL;
+    }
+
+    if (SDL_GameControllerAddMapping(mapping) == -1){
+        return NULL;
+    }
+
+    Py_RETURN_NONE;
+}
+
 static PyMethodDef _controller_module_methods[] = {
     {"init", (PyCFunction)controller_module_init, METH_NOARGS,
      DOC_SDL2_CONTROLLER_INIT},
@@ -106,6 +122,8 @@ static PyMethodDef _controller_module_methods[] = {
      METH_VARARGS | METH_KEYWORDS, DOC_SDL2_CONTROLLER_ISCONTROLLER},
     {"get_count", (PyCFunction)controller_module_get_count, METH_NOARGS,
      DOC_SDL2_CONTROLLER_GETCOUNT},
+    {"load_mapping", (PyCFunction)controller_load_mapping, METH_VARARGS,
+     DOC_SDL2_CONTROLLER_LOADMAPPING},
     {NULL, NULL, 0, NULL}};
 
 static PyObject *
